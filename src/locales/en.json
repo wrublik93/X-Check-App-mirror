@@ -1,0 +1,11 @@
+{
+  "locale": "en",
+  "interface": {
+    "Header": {
+      "logoTitle": "X Check App"
+    }
+  },
+  "routeNamesMap": {
+    "/": "X Check App for RS School"
+  }
+}

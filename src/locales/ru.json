@@ -1,0 +1,11 @@
+{
+  "locale": "ru",
+  "interface": {
+    "Header": {
+      "logoTitle": "Приложение для кросс-чека"
+    }
+  },
+  "routeNamesMap": {
+    "/": "Приложение для кросс-чека в RS School"
+  }
+}
