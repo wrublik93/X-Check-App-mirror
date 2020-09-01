@@ -57,12 +57,6 @@ const config: Configuration = {
         exclude: /node_modules/,
       },
       {
-        enforce: 'pre',
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
-      {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {

@@ -148,13 +148,30 @@
         "object": true
       }
     ],
-    "react/prop-types": 0,
+    "radix": "error",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, {
       "extensions": [".ts", ".tsx"]
       }
     ],
-    "react/jsx-fragments" : ["off", "element"]
+    "react/jsx-fragments" : ["error", "element"],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never"
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "markers": [
+          "/"
+        ]
+      }
+    ]
   }
 }
