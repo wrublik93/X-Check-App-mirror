@@ -1,13 +1,8 @@
 @charset 'UTF-8';
 
-@import
-  '@/assets/stylesheets/abstracts/mixins',
-  '@/assets/stylesheets/abstracts/placeholders',
+@import '@/assets/stylesheets/abstracts/mixins', '@/assets/stylesheets/abstracts/placeholders',
   '@/assets/stylesheets/abstracts/variables';
 
-@import
-  '@/assets/stylesheets/vendors/normalize.min';
+@import '@/assets/stylesheets/vendors/normalize.min';
 
-@import
-  '@/assets/stylesheets/base/fonts',
-  '@/assets/stylesheets/base/base';
+@import '@/assets/stylesheets/base/fonts', '@/assets/stylesheets/base/base';
