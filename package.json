@@ -21,7 +21,7 @@
     "fix": "run-s prettier:format lint:fix",
     "fix-staged": "lint-staged",
     "svgo": "svgo --pretty --indent=2 --disable=removeViewBox,mergePaths --enable=inlineStyles  --config '{ \"plugins\": [ { \"inlineStyles\": { \"onlyMatchedOnce\": false } }] }' $FILE",
-    "svgo-all": "svgo -r -f src/assets/images --pretty --indent=2 --disable=removeViewBox,mergePaths --enable=inlineStyles  --config '{ \"plugins\": [ { \"inlineStyles\": { \"onlyMatchedOnce\": false } }] }' $FILE"
+    "svgo-all": "svgo -r -f src --pretty --indent=2 --disable=removeViewBox,mergePaths --enable=inlineStyles  --config '{ \"plugins\": [ { \"inlineStyles\": { \"onlyMatchedOnce\": false } }] }' $FILE"
   },
   "dependencies": {
     "@babel/core": "^7.11.5",
