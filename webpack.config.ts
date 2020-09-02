@@ -42,6 +42,7 @@ const config: Configuration = {
   entry: './src/index.tsx',
   output: {
     path: resolve(__dirname, 'build'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   module: {
@@ -91,12 +92,11 @@ const config: Configuration = {
     },
   },
   devServer: {
-    contentBase: './build',
+    contentBase: './src/static',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      favicon: 'public/favicon.svg',
+      template: './index.html',
     }),
     isAnalyze ? new BundleAnalyzerPlugin() : nothing,
     isProduction
