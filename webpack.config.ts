@@ -39,6 +39,7 @@ const formStylesRule = (useModules = false) => ({
 });
 
 const config: Configuration = {
+  mode: isProduction ? 'production' : 'development',
   entry: './src/index.tsx',
   output: {
     path: resolve(__dirname, 'build'),
@@ -98,10 +99,11 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    new MiniCssExtractPlugin({
+      chunkFilename: '[id].css',
+      filename: '[name].css',
+    }),
     isAnalyze ? new BundleAnalyzerPlugin() : nothing,
-    isProduction
-      ? new MiniCssExtractPlugin({ chunkFilename: '[id].css', filename: '[name].css' })
-      : nothing,
   ],
 };
 
