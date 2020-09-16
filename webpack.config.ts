@@ -11,7 +11,7 @@ const isAnalyze = process.env.analyze;
 const nothing = () => {};
 
 const formStylesRule = (useModules = false) => ({
-  test: /\.(scss|sass|pcss)$/,
+  test: /\.(css|scss|sass|pcss)$/,
   [useModules ? 'exclude' : 'include']: /assets\/stylesheets|node_modules/,
   use: [
     isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -66,7 +66,7 @@ const config: Configuration = {
             options: {
               limit: 8192,
               name: isProduction ? '[contenthash].[ext]' : '[name].[ext]',
-              outputPath: 'assets/images',
+              outputPath: 'static/images',
             },
           },
         ],
@@ -77,7 +77,7 @@ const config: Configuration = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'assets/fonts',
+              outputPath: 'static/fonts',
             },
           },
         ],
