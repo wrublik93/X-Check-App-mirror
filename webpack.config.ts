@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration } from 'webpack';
@@ -40,6 +41,7 @@ const formStylesRule = (useModules = false) => ({
 
 const config: Configuration = {
   mode: isProduction ? 'production' : 'development',
+  devtool: isProduction ? false : 'source-map',
   entry: './src/index.tsx',
   output: {
     path: resolve(__dirname, 'build'),
@@ -104,6 +106,11 @@ const config: Configuration = {
       filename: '[name].css',
     }),
     isAnalyze ? new BundleAnalyzerPlugin() : nothing,
+    isProduction
+      ? new CopyWebpackPlugin({
+        patterns: [{ from: './src/static', to: '.' }],
+      })
+      : nothing,
   ],
 };
 
