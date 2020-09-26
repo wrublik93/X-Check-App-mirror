@@ -13,7 +13,7 @@ export type CriterionCategories = Entity;
 
 export type SessionStatus = Entity;
 export type TaskStatus = Entity;
-export type UserReviewRequestStatus = Entity;
+export type ReviewRequestStatus = Entity;
 export type ReviewStatus = Entity;
 export type DisputeStatus = Entity;
 
@@ -90,12 +90,12 @@ export interface Criterion {
   onlyForMentor: boolean;
 }
 
-export interface UserReviewRequest {
+export interface ReviewRequest {
   id: number;
   sessionId: number;
   userId: number;
   taskId: number;
-  userReviewRequestStatusId: number;
+  statusId: number;
   selfGrade: Score[];
 }
 
@@ -108,7 +108,7 @@ export interface Score {
 
 export interface Review {
   id: number;
-  userReviewRequestId: number;
+  reviewRequestId: number;
   userId: number;
   reviewStatusId: number;
   grade: Score[];
