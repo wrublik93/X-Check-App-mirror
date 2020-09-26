@@ -1,146 +1,134 @@
+interface Entity {
+  id: number;
+  name: string;
+}
+
+interface DatePeriod {
+  startDate: Date;
+  endDate: Date;
+}
+
+export type TaskCategories = Entity;
+export type CriterionCategories = Entity;
+
+export type SessionStatus = Entity;
+export type TaskStatus = Entity;
+export type UserReviewRequestStatus = Entity;
+export type ReviewStatus = Entity;
+export type DisputeStatus = Entity;
+
 export interface User {
   id: number;
   token: string;
   firstName: string;
   lastName: string;
-  githubId: string;
-  githubToken: string;
   email: string;
   password: string;
-  currentCourse: number[];
-  role: number[];
+  githubId: string;
+  githubToken: string;
+  currentCourseIds: number[];
+  roleIds: number[];
 }
 
-export interface Course {
-  id: number;
-  name: string;
+export interface Course extends Entity, DatePeriod {
   fullName: string;
   description: string;
-  startDate: Date;
-  endDate: Date;
   completed: boolean;
 }
 
-export interface Role {
-  id: number;
-  name: string;
-  rights: number[];
+export interface Role extends Entity {
+  rightsIds: Right[];
 }
 
-export interface Rights {
-  read: boolean;
-  create: boolean;
-  delete: boolean;
-  change: boolean;
+export interface Right extends Entity {
+  allowed: boolean;
 }
 
-export interface Session {
+export interface Session extends DatePeriod {
   id: number;
-  status: number;
+  statusId: number;
   taskId: number;
   coefficient: number;
-  startDate: Date;
-  endDate: Date;
   discardMinScore: boolean;
+  discardMaxScore: boolean;
   minReviewAmount: number;
   desiredReviewersAmount: number;
-  attendees: number[];
+  reviewPairsIds: number[];
 }
 
-export interface Attendees {
+export interface ReviewPairs {
   id: number;
+  sessionId: number;
+  pairsIds: Pairs[];
 }
 
-export interface SessionStatus {
+export interface Pairs {
   id: number;
-  name: string;
+  userReviewerId: number;
+  usersInReviewIds: number[];
 }
 
-export interface Task {
-  id: number;
-  name: string;
+export interface Task extends Entity {
   description: string;
   descriptionURL: string;
   createdDate: Date;
   updatedDate: Date;
   authorId: number;
-  status: number;
-  categoryTask: number[];
-  criterions: Criterion[];
-}
-
-export interface TaskStatus {
-  id: number;
-  name: string;
-}
-
-export interface CategoryTask {
-  id: number;
-  name: string;
+  taskStatusId: number;
+  taskCategoryId: number;
+  criterionsCategoriesOrder: number[];
+  criterionsIds: number[];
 }
 
 export interface Criterion {
   id: number;
   minScore: number;
   maxScore: number;
-  categoryTask: number;
+  categoryCriterionId: number;
   title: string;
   description: string;
+  onlyForMentor: boolean;
+}
+
+export interface UserReviewRequest {
+  id: number;
+  sessionId: number;
+  userId: number;
+  taskId: number;
+  userReviewRequestStatusId: number;
+  selfGrade: Score[];
+}
+
+export interface Score {
+  id: number;
+  criterionId: number;
+  score: number;
+  comment?: string;
 }
 
 export interface Review {
   id: number;
-  requestId: number;
+  userReviewRequestId: number;
   userId: number;
-  authorGithubId: string;
-  reviewStatus: number;
-  grade: number[];
+  reviewStatusId: number;
+  grade: Score[];
   isVisibleContactInfo: boolean;
 }
 
-export interface GradeReview {
+export interface Dispute {
   id: number;
-}
-
-export interface ReviewStatus {
-  id: number;
-  name: string;
-}
-export interface ReviewRequest {
-  id: number;
-  sessionId: number;
-  authorId: number;
-  authorGithubId: string;
-  task: number;
-  status: number;
-  selfGrade: SelfGrade[];
-}
-
-export interface SelfGrade {
-  id: number;
-}
-
-export interface ReviewRequestStatus {
-  id: number;
-  name: string;
+  disputeStatusId: number;
+  reviewId: number;
+  categoryCriterionId: number;
+  comment: string;
+  suggestedScore: number;
 }
 
 export interface GlobalStore {
   users: User[];
   courses: Course[];
   roles: Role[];
-  rights: Rights[];
   sessions: Session[];
-  attendees: Attendees[];
-  sessionStatuses: SessionStatus[];
   tasks: Task[];
-  taskStatuses: TaskStatus[];
-  categoriesTask: CategoryTask[];
-  criterions: Criterion[];
   reviews: Review[];
-  gradeReviews: GradeReview[];
-  reviewStatuses: ReviewStatus[];
-  reviewRequests: ReviewRequest[];
-  selfGrades: SelfGrade[];
-  reviewRequestStatuses: ReviewRequestStatus[];
 }
