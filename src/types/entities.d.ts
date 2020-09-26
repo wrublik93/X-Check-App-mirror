@@ -7,8 +7,8 @@ export interface User {
   githubToken: string;
   email: string;
   password: string;
-  currentCourse: Course[];
-  role: Role[];
+  currentCourse: number[];
+  role: number[];
 }
 
 export interface Course {
@@ -24,7 +24,7 @@ export interface Course {
 export interface Role {
   id: number;
   name: string;
-  rights: Rights[];
+  rights: number[];
 }
 
 export interface Rights {
@@ -44,7 +44,7 @@ export interface Session {
   discardMinScore: boolean;
   minReviewAmount: number;
   desiredReviewersAmount: number;
-  attendees: Attendees[];
+  attendees: number[];
 }
 
 export interface Attendees {
@@ -64,9 +64,9 @@ export interface Task {
   createdDate: Date;
   updatedDate: Date;
   authorId: number;
-  status: TaskStatus[];
-  categoryTask: CategoryTask[];
-  criterions: Criterions[];
+  status: number;
+  categoryTask: number[];
+  criterions: Criterion[];
 }
 
 export interface TaskStatus {
@@ -79,7 +79,7 @@ export interface CategoryTask {
   name: string;
 }
 
-export interface Criterions {
+export interface Criterion {
   id: number;
   minScore: number;
   maxScore: number;
@@ -88,6 +88,24 @@ export interface Criterions {
   description: string;
 }
 
+export interface Review {
+  id: number;
+  requestId: number;
+  userId: number;
+  authorGithubId: string;
+  reviewStatus: number;
+  grade: number[];
+  isVisibleContactInfo: boolean;
+}
+
+export interface GradeReview {
+  id: number;
+}
+
+export interface ReviewStatus {
+  id: number;
+  name: string;
+}
 export interface ReviewRequest {
   id: number;
   sessionId: number;
@@ -107,21 +125,22 @@ export interface ReviewRequestStatus {
   name: string;
 }
 
-export interface Review {
-  id: number;
-  requestId: number;
-  userId: number;
-  authorGithubId: string;
-  reviewStatus: number;
-  grade: GradeReview[];
-  isVisibleContactInfo: boolean;
-}
-
-export interface GradeReview {
-  id: number;
-}
-
-export interface ReviewStatus {
-  id: number;
-  name: string;
+export interface GlobalStore {
+  users: User[];
+  courses: Course[];
+  roles: Role[];
+  rights: Rights[];
+  sessions: Session[];
+  attendees: Attendees[];
+  sessionStatuses: SessionStatus[];
+  tasks: Task[];
+  taskStatuses: TaskStatus[];
+  categoriesTask: CategoryTask[];
+  criterions: Criterion[];
+  reviews: Review[];
+  gradeReviews: GradeReview[];
+  reviewStatuses: ReviewStatus[];
+  reviewRequests: ReviewRequest[];
+  selfGrades: SelfGrade[];
+  reviewRequestStatuses: ReviewRequestStatus[];
 }
