@@ -1,4 +1,13 @@
 /* eslint-disable max-len */
-//  For all global constants
-//  If you need to create more than 3 constants for any component
-//  Please add a new file with component's name in the constants folder
+
+const routeNamesMap = {
+  '/': 'Registration',
+  '/home': 'Home',
+  '/tasks': 'Tasks',
+  '/reviewRequests': 'Review Requests',
+  '/reviews': 'Reviews',
+  '/aboutUs': 'About Us',
+  '/404': '404: Page not found',
+};
+
+export { routeNamesMap as default };
