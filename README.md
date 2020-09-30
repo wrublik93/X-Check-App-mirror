@@ -1,6 +1,13 @@
 # X Check App / RS Assessment Tool
 
+## Links
+
+Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
 Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
+
+## Entity Relationship Diagram (ERD)
+
+![ERD](src/static/images/ERD.png)
 
 ## Entities
 
@@ -58,7 +65,7 @@ Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/x
 | startDate              | Date       |
 | endDate                | Date       |
 
-### Interface ReviewPairs
+### Interface Review Pairs
 | name      | type      |
 |-----------|-----------|
 | id        | number    |
@@ -87,4 +94,93 @@ Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/x
 | criterionsCategoriesOrder | number\[\] |
 | criterionsIds             | number\[\] |
 
+### Interface Criterion
+| name                | type    |
+|---------------------|---------|
+| id                  | number  |
+| minScore            | number  |
+| maxScore            | number  |
+| categoryCriterionId | number  |
+| title               | string  |
+| description         | string  |
+| onlyForMentor       | boolean |
 
+### Interface Review Request 
+| name      | type      |
+|-----------|-----------|
+| id        | number    |
+| sessionId | number    |
+| userId    | number    |
+| taskId    | number    |
+| statusId  | number    |
+| selfGrade | Score\[\] |
+
+### Interface Score
+| name        | type   |
+|-------------|--------|
+| id          | number |
+| criterionId | number |
+| score       | number |
+| comment?    | string |
+
+### Interface Review
+| name                 | type      |
+|----------------------|-----------|
+| id                   | number    |
+| reviewRequestId      | number    |
+| userId               | number    |
+| reviewStatusId       | number    |
+| grade                | Score\[\] |
+| isVisibleContactInfo | boolean   |
+
+### Interface Dispute
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| disputeStatusId     | number |
+| reviewId            | number |
+| categoryCriterionId | number |
+| comment             | string |
+| suggestedScore      | number |
+
+### Interface Task Category
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Criterion Category
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Session Status
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Task Status
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Review Request Status
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Review Status
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
+
+### Interface Dispute Status
+| name                | type   |
+|---------------------|--------|
+| id                  | number |
+| name                | string |
