@@ -16,8 +16,8 @@ export interface CreateUserArgs {
   password: string;
   githubId?: string;
   githubToken?: string;
-  currentCourseIds?: number[];
-  roleIds?: number[];
+  currentCourseIds: number[];
+  roleIds: number[];
 }
 
 export interface GetCourseArgs {
@@ -57,7 +57,7 @@ export interface CreateTaskArgs {
   authorId: number;
   taskStatusId: number;
   taskCategoryId: number;
-  criterionsCategoriesOrder?: number[];
+  criterionsCategoriesOrder: number[];
   criterionsIds?: number[];
 }
 

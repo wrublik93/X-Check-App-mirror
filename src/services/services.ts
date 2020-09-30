@@ -89,6 +89,8 @@ export const createUser = async ({
   lastName,
   email,
   password,
+  currentCourseIds,
+  roleIds,
 }: CreateUserArgs): Promise<User | boolean> => {
   const registered = await checkEmail({ email });
   const entity = 'users';
@@ -104,6 +106,8 @@ export const createUser = async ({
         lastName,
         email,
         password,
+        currentCourseIds,
+        roleIds,
       }),
     });
     return rawResponse.json() as Promise<User>;
@@ -299,10 +303,14 @@ export const createTask = async ({
   authorId,
   taskStatusId,
   taskCategoryId,
+  criterionsCategoriesOrder,
 }: CreateTaskArgs): Promise<Task | boolean> => {
   const registered = await checkTask({ name });
   const entity = 'tasks';
   if (!registered) {
+    if (!criterionsCategoriesOrder.length) {
+      criterionsCategoriesOrder.push(0, 1, 2, 3);
+    }
     const rawResponse = await fetch(`${url}${entity}`, {
       method: 'POST',
       headers: {
@@ -318,6 +326,7 @@ export const createTask = async ({
         authorId,
         taskStatusId,
         taskCategoryId,
+        criterionsCategoriesOrder,
       }),
     });
     return rawResponse.json() as Promise<Task>;
