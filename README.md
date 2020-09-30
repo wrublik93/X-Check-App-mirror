@@ -6,7 +6,13 @@ Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
 Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
 
 ## RACI
-Здесть вставим матрицу
+Здесь вставим матрицу
+
+## Organization our work
+
+We use Trello, Discord and telegram.
+
+![Imgur](https://i.imgur.com/rP2vvi1.png)
 
 ## Entity Relationship Diagram (ERD)
 
