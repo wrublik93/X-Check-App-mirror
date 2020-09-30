@@ -91,10 +91,13 @@ export const createUser = async ({
   password,
   currentCourseIds,
   roleIds,
+  token,
 }: CreateUserArgs): Promise<User | boolean> => {
   const registered = await checkEmail({ email });
   const entity = 'users';
   if (!registered) {
+    let tokenDecode = token;
+    tokenDecode = `${Buffer.from(email + firstName + lastName).toString('base64')}`;
     const rawResponse = await fetch(`${url}${entity}`, {
       method: 'POST',
       headers: {
@@ -108,6 +111,7 @@ export const createUser = async ({
         password,
         currentCourseIds,
         roleIds,
+        token: tokenDecode,
       }),
     });
     return rawResponse.json() as Promise<User>;

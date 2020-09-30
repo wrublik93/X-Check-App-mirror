@@ -9,7 +9,7 @@ export interface EmailUser {
 }
 
 export interface CreateUserArgs {
-  token?: string;
+  token: string;
   firstName: string;
   lastName: string;
   email: string;
