@@ -7,7 +7,7 @@ Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/x
 
 ## Entity Relationship Diagram (ERD)
 
-[Imgur](https://i.imgur.com/QktNVWC.png)
+![Imgur](https://i.imgur.com/QktNVWC.png)
 
 ## Entities
 
