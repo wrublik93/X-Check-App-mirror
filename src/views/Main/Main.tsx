@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-const Main = (props: { children: JSX.Element }) => {
-  const { children } = props;
-  return <main className="main">{children}</main>;
-};
+const Main: FunctionComponent = ({ children }): JSX.Element => (
+  <main className="main">{children}</main>
+);
 
 export default Main;
