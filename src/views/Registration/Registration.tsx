@@ -1,5 +1,9 @@
 import React from 'react';
 
-const Registration = (): JSX.Element => <div>Registration page</div>;
+import styles from '@/views/Registration/Registration.scss';
+
+const Registration = (): JSX.Element => (
+  <div className={styles['registration']}>Registration page</div>
+);
 
 export default Registration;

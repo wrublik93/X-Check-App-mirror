@@ -1,5 +1,7 @@
 import React from 'react';
 
-const Reviews = (): JSX.Element => <div>Reviews page</div>;
+import styles from '@/views/Reviews/Reviews.scss';
+
+const Reviews = (): JSX.Element => <div className={styles['reviews']}>Reviews page</div>;
 
 export default Reviews;

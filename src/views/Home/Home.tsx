@@ -1,5 +1,7 @@
 import React from 'react';
 
-const Home = (): JSX.Element => <div>Home page</div>;
+import styles from '@/views/Home/Home.scss';
+
+const Home = (): JSX.Element => <div className={styles['home']}>Home page</div>;
 
 export default Home;

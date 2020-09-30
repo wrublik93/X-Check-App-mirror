@@ -1,5 +1,9 @@
 import React from 'react';
 
-const ReviewRequests = (): JSX.Element => <div>Review Requests page</div>;
+import styles from '@/views/ReviewRequests/ReviewRequests.scss';
+
+const ReviewRequests = (): JSX.Element => (
+  <div className={styles['review-requests']}>Review Requests page</div>
+);
 
 export default ReviewRequests;

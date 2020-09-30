@@ -1,5 +1,7 @@
 import React from 'react';
 
-const AboutUs = (): JSX.Element => <div>About Us page</div>;
+import styles from '@/views/AboutUs/AboutUs.scss';
+
+const AboutUs = (): JSX.Element => <div className={styles['about-us']}>About Us page</div>;
 
 export default AboutUs;

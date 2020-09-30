@@ -1,5 +1,7 @@
 import React from 'react';
 
-const Tasks = (): JSX.Element => <div>Tasks page</div>;
+import styles from '@/views/Tasks/Tasks.scss';
+
+const Tasks = (): JSX.Element => <div className={styles['tasks']}>Tasks page</div>;
 
 export default Tasks;
