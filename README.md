@@ -2,8 +2,11 @@
 
 ## Links
 
-Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
+Link to Heroku: https://x-check-app-server-team25.herokuapp.com/  
 Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
+
+## RACI
+Здесть вставим матрицу
 
 ## Entity Relationship Diagram (ERD)
 
@@ -184,3 +187,29 @@ Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/x
 |---------------------|--------|
 | id                  | number |
 | name                | string |
+
+## Roles
+
+In our app we use next roles:
+1. administrator;
+2. trainer;
+3. mentor;
+4. activist;
+5. student.
+
+## Tools
+
+We use:
+- __antd__ - React UI Library (UI библиотека)
+- __eslint__ - Pluggable JavaScript linter (линтинг кода)
+- __prettier__ - Opinionated Code Formatter (форматтер кода)
+- __lint-staged__ - запуск скриптов только для коммитов со статусом staged
+- __husky__ - использование хуков гита для коммитов
+- __react__ - JavaScript-библиотека для создания пользовательских интерфейсов
+- __typescript__ - TypeScript extends JavaScript by adding types (типизация)
+- __react-router__ - маршрутизация приложения
+- __react-cookie__ - куки
+- __classnames__ - для использования множественных классов
+- __node-sass__ - для использования Sass
+- __svgo__ - для оптимизации svg
+- __npm-run-all__ - для запуска множественных скриптов
