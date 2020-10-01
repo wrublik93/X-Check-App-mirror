@@ -141,6 +141,7 @@
     "no-duplicate-imports": "error",
     "no-multiple-empty-lines": "error",
     "no-await-in-loop": "off",
+    "no-param-reassign":  ["error", { "props": false }],
     "prefer-const": "error",
     "prefer-destructuring": [
       "error",
