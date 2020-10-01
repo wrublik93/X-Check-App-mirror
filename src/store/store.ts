@@ -1,11 +1,19 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import taskSliceReducer from '@/store/reducers/task';
-import userSliceReducer from '@/store/reducers/user';
+import coursesSliceReducer from '@/store/reducers/courses';
+import reviewsSliceReducer from '@/store/reducers/reviews';
+import rolesSliceReducer from '@/store/reducers/roles';
+import sessionsSliceReducer from '@/store/reducers/sessions';
+import tasksSliceReducer from '@/store/reducers/tasks';
+import usersSliceReducer from '@/store/reducers/users';
 
 const rootReducer = combineReducers({
-  user: userSliceReducer,
-  task: taskSliceReducer,
+  users: usersSliceReducer,
+  courses: coursesSliceReducer,
+  roles: rolesSliceReducer,
+  sessions: sessionsSliceReducer,
+  tasks: tasksSliceReducer,
+  reviews: reviewsSliceReducer,
 });
 
 export const store = configureStore({

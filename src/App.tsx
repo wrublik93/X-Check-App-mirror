@@ -5,8 +5,12 @@ import {
 } from 'react-router-dom';
 
 import routeNamesMap from '@/constants/constants';
-import { incrementTask } from '@/store/actions/task';
-import { incrementUser } from '@/store/actions/user';
+import { incrementCourses } from '@/store/actions/courses';
+import { incrementReviews } from '@/store/actions/reviews';
+import { incrementRoles } from '@/store/actions/roles';
+import { incrementSessions } from '@/store/actions/sessions';
+import { incrementTasks } from '@/store/actions/tasks';
+import { incrementUsers } from '@/store/actions/users';
 import AboutUs from '@/views/AboutUs';
 import Home from '@/views/Home';
 import Main from '@/views/Main';
@@ -26,8 +30,8 @@ const handleChange = (routeName: string) => {
 
 const App = (): JSX.Element => {
   const history = useHistory();
-  const countUser = useSelector((state: RootState) => state.user.count);
-  const countTask = useSelector((state: RootState) => state.task.count);
+  const countUser = useSelector((state: RootState) => state.users.count);
+  const countTask = useSelector((state: RootState) => state.tasks.count);
   const dispatch = useDispatch();
 
   useEffect(
@@ -39,14 +43,18 @@ const App = (): JSX.Element => {
 
   return (
     <div>
-      <button type="button" onClick={() => dispatch(incrementUser())}>User +</button>
+      <button type="button" onClick={() => dispatch(incrementUsers())}>User +</button>
       User:
       {' '}
       {countUser}
-      <button type="button" onClick={() => dispatch(incrementTask())}>Task +</button>
+      <button type="button" onClick={() => dispatch(incrementTasks())}>Task +</button>
       Task:
       {' '}
       {countTask}
+      <button type="button" onClick={() => dispatch(incrementCourses())}>Course +</button>
+      <button type="button" onClick={() => dispatch(incrementReviews())}>Review +</button>
+      <button type="button" onClick={() => dispatch(incrementSessions())}>Session +</button>
+      <button type="button" onClick={() => dispatch(incrementRoles())}>Role +</button>
       <Main>
         <Switch>
           <Route exact path="/" component={Registration} />

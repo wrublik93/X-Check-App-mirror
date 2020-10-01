@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const userSlice = createSlice({
-  name: 'user',
+export const rolesSlice = createSlice({
+  name: 'roles',
   initialState: {
     count: 0,
-    users: [],
   },
   reducers: {
-    incrementUser(state) {
+    incrementRoles(state) {
       state.count += 1;
     },
   },
 });
 
-export default userSlice.reducer;
+export default rolesSlice.reducer;
