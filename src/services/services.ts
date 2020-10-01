@@ -13,6 +13,7 @@ import {
   CreateTaskArgs,
   GetRoleArgs,
 } from '@/types/services';
+import { createToken } from '@/utils/utils';
 
 /* url*/
 const url = 'https://x-check-app-server-team25.herokuapp.com/';
@@ -91,13 +92,11 @@ export const createUser = async ({
   password,
   currentCourseIds,
   roleIds,
-  token,
 }: CreateUserArgs): Promise<User | boolean> => {
   const registered = await checkEmail({ email });
   const entity = 'users';
   if (!registered) {
-    let tokenDecode = token;
-    tokenDecode = `${Buffer.from(email + firstName + lastName).toString('base64')}`;
+    const tokenDecode = createToken({ email, firstName, lastName });
     const rawResponse = await fetch(`${url}${entity}`, {
       method: 'POST',
       headers: {
