@@ -123,12 +123,3 @@ export interface Dispute {
   comment: string;
   suggestedScore: number;
 }
-
-export interface GlobalStore {
-  users: User[];
-  courses: Course[];
-  roles: Role[];
-  sessions: Session[];
-  tasks: Task[];
-  reviews: Review[];
-}
