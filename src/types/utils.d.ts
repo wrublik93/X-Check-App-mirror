@@ -3,3 +3,7 @@ export interface CreateTokenArgs {
   firstName: string;
   lastName: string;
 }
+
+export interface CreateHashKeysArrayArgs {
+  length: number;
+}

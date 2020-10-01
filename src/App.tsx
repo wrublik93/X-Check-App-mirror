@@ -3,6 +3,7 @@ import {
   Redirect, Route, Switch, useHistory,
 } from 'react-router-dom';
 
+import Header from '@/components/Header';
 import routeNamesMap from '@/constants/constants';
 import AboutUs from '@/views/AboutUs';
 import Home from '@/views/Home';
@@ -30,6 +31,7 @@ const App = (): JSX.Element => {
 
   return (
     <div>
+      <Header />
       <Main>
         <Switch>
           <Route exact path="/" component={Registration} />
