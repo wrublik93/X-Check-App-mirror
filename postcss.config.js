@@ -1,5 +1,5 @@
 /* eslint-disable */
-import glob from 'glob-all';
+const glob = require('glob-all');
 
 module.exports = {
   plugins: [

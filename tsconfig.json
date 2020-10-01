@@ -1,21 +1,23 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "module": "ES2015",
+    "target": "ES6",
     "baseUrl": "src",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
-    ],
+    "outDir": "./build/",
+    "rootDir": "./",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
     "paths": {
       "@/*": [
         "./*"
       ]
     },
-    "outDir": "./build/",
-    "rootDir": "./",
-    "module": "CommonJS",
-    "target": "ES6",
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
   }
 }
