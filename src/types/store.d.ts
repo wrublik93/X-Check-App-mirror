@@ -1,10 +1,5 @@
 import {
-  User,
-  Course,
-  Role,
-  Session,
-  Task,
-  Review,
+  User, Course, Role, Session, Task, Review,
 } from '@/types/entities';
 
 export interface GlobalStore {

@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import routeNamesMap from '@/constants/constants';
+import { getUsers } from '@/services/services';
 import { incrementCourses } from '@/store/actions/courses';
 import { incrementReviews } from '@/store/actions/reviews';
 import { incrementRoles } from '@/store/actions/roles';
@@ -41,20 +42,41 @@ const App = (): JSX.Element => {
     [history]
   );
 
+  const test = async () => {
+    const tests = await getUsers();
+    // eslint-disable-next-line no-console
+    console.log(tests);
+  };
+
   return (
     <div>
-      <button type="button" onClick={() => dispatch(incrementUsers())}>User +</button>
+      <button type="button" onClick={test}>
+        Test
+      </button>
+      <button type="button" onClick={() => dispatch(incrementUsers())}>
+        User +
+      </button>
       User:
       {' '}
       {countUser}
-      <button type="button" onClick={() => dispatch(incrementTasks())}>Task +</button>
+      <button type="button" onClick={() => dispatch(incrementTasks())}>
+        Task +
+      </button>
       Task:
       {' '}
       {countTask}
-      <button type="button" onClick={() => dispatch(incrementCourses())}>Course +</button>
-      <button type="button" onClick={() => dispatch(incrementReviews())}>Review +</button>
-      <button type="button" onClick={() => dispatch(incrementSessions())}>Session +</button>
-      <button type="button" onClick={() => dispatch(incrementRoles())}>Role +</button>
+      <button type="button" onClick={() => dispatch(incrementCourses())}>
+        Course +
+      </button>
+      <button type="button" onClick={() => dispatch(incrementReviews())}>
+        Review +
+      </button>
+      <button type="button" onClick={() => dispatch(incrementSessions())}>
+        Session +
+      </button>
+      <button type="button" onClick={() => dispatch(incrementRoles())}>
+        Role +
+      </button>
       <Main>
         <Switch>
           <Route exact path="/" component={Registration} />
