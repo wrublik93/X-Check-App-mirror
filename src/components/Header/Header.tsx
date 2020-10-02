@@ -20,9 +20,9 @@ const data: HeaderDataProps[] = [
 const Header: FunctionComponent = () => {
   const hashKeysArray = createHashKeysArray({ length: data.length });
 
-  const listItems = data.map((dataItem, index) => (
-    <Button>
-      <NavLink to={dataItem.link} key={hashKeysArray[index]} className={styles['nav-link-header']}>
+  const listItems = data.map((dataItem, index: number) => (
+    <Button key={hashKeysArray[index]}>
+      <NavLink to={dataItem.link} className={styles['nav-link-header']}>
         {dataItem.name}
       </NavLink>
     </Button>
