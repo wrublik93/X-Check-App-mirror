@@ -107,9 +107,7 @@ const config = {
     }),
     isAnalyze ? new BundleAnalyzerPlugin() : nothing,
     isProduction
-      ? new CopyWebpackPlugin({
-        patterns: [{ from: './src/static', to: '.' }],
-      })
+      ? new CopyWebpackPlugin({ patterns: [{ from: './src/static', to: '.' }] })
       : nothing,
   ],
 };
