@@ -1,4 +1,4 @@
-import { usersSlice } from '@/store/reducers/users';
+/* import { usersSlice } from '@/store/reducers/users'; */
 
 // eslint-disable-next-line import/prefer-default-export
-export const { incrementUsers, getUsersAction } = usersSlice.actions;
+/* export const {  } = usersSlice.actions; */
