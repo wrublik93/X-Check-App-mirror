@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
+import { HeaderDataProps } from '@/types/props';
 
-const routeNamesMap = {
+export const routeNamesMap = {
   '/': 'Registration',
   '/home': 'Home',
   '/tasks': 'Tasks',
@@ -10,4 +10,10 @@ const routeNamesMap = {
   '/404': '404: Page not found',
 };
 
-export { routeNamesMap as default };
+export const headerLinks: HeaderDataProps[] = [
+  { name: 'Home', link: '/home' },
+  { name: 'Tasks', link: '/tasks' },
+  { name: 'Review Requests', link: '/reviewRequests' },
+  { name: 'Reviews', link: '/reviews' },
+  { name: 'About Us', link: '/aboutUs' },
+];

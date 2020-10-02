@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 import Header from '@/components/Header';
-import routeNamesMap from '@/constants/constants';
+import { routeNamesMap, headerLinks } from '@/constants/constants';
 import AboutUs from '@/views/AboutUs';
 import Home from '@/views/Home';
 import Main from '@/views/Main';
@@ -31,7 +31,7 @@ const App = (): JSX.Element => {
 
   return (
     <div>
-      <Header />
+      <Header headerLinksList={headerLinks} />
       <Main>
         <Switch>
           <Route exact path="/" component={Registration} />

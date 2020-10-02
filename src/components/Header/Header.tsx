@@ -9,18 +9,14 @@ import styles from '@/components/Header/Header.scss';
 import { HeaderDataProps } from '@/types/props';
 import { createHashKeysArray } from '@/utils/utils';
 
-const data: HeaderDataProps[] = [
-  { name: 'Home', link: '/home' },
-  { name: 'Tasks', link: '/tasks' },
-  { name: 'Review Requests', link: '/reviewRequests' },
-  { name: 'Reviews', link: '/reviews' },
-  { name: 'About Us', link: '/aboutUs' },
-];
+interface HeaderArgs {
+  headerLinksList: HeaderDataProps[];
+}
 
-const Header: FunctionComponent = () => {
-  const hashKeysArray = createHashKeysArray({ length: data.length });
+const Header: FunctionComponent<HeaderArgs> = ({ headerLinksList }) => {
+  const hashKeysArray = createHashKeysArray({ length: headerLinksList.length });
 
-  const listItems = data.map((dataItem, index: number) => (
+  const listItems = headerLinksList.map((dataItem, index: number) => (
     <Button key={hashKeysArray[index]}>
       <NavLink to={dataItem.link} className={styles['nav-link-header']}>
         {dataItem.name}
