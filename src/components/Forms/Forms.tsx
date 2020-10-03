@@ -8,6 +8,7 @@ import 'antd/lib/button/style/index.css';
 import 'antd/lib/form/style/index.css';
 import 'antd/lib/input/style/index.css';
 import 'antd/lib/radio/style/index.css';
+import styles from '@/components/Forms/Forms.scss';
 import { FormInputProps, FormInfoProps, FormRadioGroupProps } from '@/types/props';
 import { createHashKeysArray } from '@/utils/utils';
 
@@ -62,10 +63,10 @@ const Forms: FunctionComponent<FormArgs> = ({ formInputList, formInfo, formRadio
     : undefined;
   return (
     <div>
-      <Form name={formInfo.nameForm}>
+      <Form className={styles['form-main']} name={formInfo.nameForm}>
         {listInputItems}
         {listRadioGroupItems}
-        <Form.Item>
+        <Form.Item className={styles['form-main']}>
           <Button type="primary" htmlType="submit">
             {formInfo.nameButton}
           </Button>
