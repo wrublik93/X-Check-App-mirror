@@ -1,4 +1,4 @@
-/* import { tasksSlice } from '@/store/reducers/tasks'; */
+import { tasksSlice } from '@/store/reducers/tasks';
 
 // eslint-disable-next-line import/prefer-default-export
-/* export const {  } = tasksSlice.actions; */
+export const { getAllTasks } = tasksSlice.actions;
