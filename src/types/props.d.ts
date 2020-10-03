@@ -5,6 +5,7 @@ export interface HeaderDataProps {
 
 interface RulesInputProps {
   required: boolean;
+  type: string;
   message: string;
 }
 
@@ -28,11 +29,15 @@ export interface FormInputProps {
 export interface FormRadioGroupProps {
   name: string;
   label: string;
-  rules: RulesInputProps;
+  rules: RulesRadioInputProps;
   radioButtonInput: RadioInputProps[];
 }
 
 export interface FormInfoProps {
   nameForm: string;
   nameButton: string;
+}
+
+export interface FormButtonSubmit {
+  name: string;
 }
