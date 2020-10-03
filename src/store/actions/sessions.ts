@@ -1,4 +1,4 @@
-/* import { sessionsSlice } from '@/store/reducers/sessions'; */
+import { sessionsSlice } from '@/store/reducers/sessions';
 
 // eslint-disable-next-line import/prefer-default-export
-/* export const { } = sessionsSlice.actions; */
+export const { getAllSessions } = sessionsSlice.actions;
