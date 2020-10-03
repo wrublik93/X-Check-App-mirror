@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import coursesSliceReducer from '@/store/reducers/courses';
+import modalsSliceReducer from '@/store/reducers/modals';
 import reviewsSliceReducer from '@/store/reducers/reviews';
 import rolesSliceReducer from '@/store/reducers/roles';
 import sessionsSliceReducer from '@/store/reducers/sessions';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   sessions: sessionsSliceReducer,
   tasks: tasksSliceReducer,
   reviews: reviewsSliceReducer,
+  modals: modalsSliceReducer,
 });
 
 export const store = configureStore({
