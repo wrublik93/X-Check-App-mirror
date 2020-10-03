@@ -1,5 +1,9 @@
 import {
-  FormInputProps, HeaderDataProps, FormInfoProps, FormRadioGroupProps,
+  FormInputProps,
+  HeaderDataProps,
+  FormInfoProps,
+  FormRadioGroupProps,
+  FormButtonSubmit,
 } from '@/types/props';
 
 export const routeNamesMap = {
@@ -42,6 +46,7 @@ export const logInInputs: FormInputProps[] = [
     placeholder: 'Input your email...',
     rules: {
       required: true,
+      type: 'email',
       message: 'Please input your email!',
     },
   },
@@ -51,6 +56,7 @@ export const logInInputs: FormInputProps[] = [
     placeholder: 'Input your password...',
     rules: {
       required: true,
+      type: 'string',
       message: 'Please input your password!',
     },
   },
@@ -63,7 +69,8 @@ export const signUpInputs: FormInputProps[] = [
     placeholder: 'Input your email...',
     rules: {
       required: true,
-      message: 'Please input your email!',
+      type: 'email',
+      message: 'Please input valid email!',
     },
   },
   {
@@ -72,6 +79,7 @@ export const signUpInputs: FormInputProps[] = [
     placeholder: 'Input your password...',
     rules: {
       required: true,
+      type: 'string',
       message: 'Please input your password!',
     },
   },
@@ -81,6 +89,7 @@ export const signUpInputs: FormInputProps[] = [
     placeholder: 'Input your first name...',
     rules: {
       required: true,
+      type: 'string',
       message: 'Please input your first name!',
     },
   },
@@ -90,6 +99,7 @@ export const signUpInputs: FormInputProps[] = [
     placeholder: 'Input your last name...',
     rules: {
       required: true,
+      type: 'string',
       message: 'Please input your last name!',
     },
   },
@@ -137,3 +147,7 @@ export const signUpRadios: FormRadioGroupProps[] = [
     ],
   },
 ];
+
+export const logInSubmit: FormButtonSubmit = {
+  name: 'logInSubmit',
+};
