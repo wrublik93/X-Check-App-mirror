@@ -15,24 +15,5 @@ module.exports = {
         'custom-media-queries': true,
       },
     }),
-    ...(process.env.NODE_ENV === 'production'
-      ? [
-          require('@fullhuman/postcss-purgecss')({
-            content: [
-              './src/**/*.tsx',
-              ...glob.sync('./src/**/*.js', { nodir: true }),
-              ...glob.sync('./node_modules/antd/es/button/**/*.css', {
-                nodir: true,
-              }),
-            ],
-            extractors: [
-              {
-                extractor: (content) => content.match(/([a-zA-Z-]+)(?= {)/g) || [],
-                extensions: ["css"],
-              },
-            ],
-          }),
-        ]
-      : []),
   ],
 };
