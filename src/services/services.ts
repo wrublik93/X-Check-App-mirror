@@ -97,7 +97,7 @@ export const createUser = async ({
   lastName,
   email,
   password,
-  currentCourseIds,
+  /* currentCourseIds, */
   roleIds,
 }: CreateUserArgs): Promise<User | boolean> => {
   const registered = await checkEmail({ email });
@@ -115,7 +115,7 @@ export const createUser = async ({
         lastName,
         email,
         password,
-        currentCourseIds,
+        /* currentCourseIds, */
         roleIds,
         token: tokenDecode,
       }),
@@ -408,4 +408,17 @@ export const getReviews = async (): Promise<Review> => {
     },
   });
   return rawResponse.json() as Promise<Review>;
+};
+
+/** Get role by name */
+export const getRoleByName = async ({ name }: GetRoleArgs): Promise<Role> => {
+  const entity = 'roles';
+  const rawResponse = await fetch(`${url}${entity}?name=${name}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<Role>;
 };
