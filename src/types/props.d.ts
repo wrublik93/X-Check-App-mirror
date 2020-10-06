@@ -24,6 +24,8 @@ export interface FormInputProps {
   name: string;
   placeholder: string;
   rules: RulesInputProps;
+  type?: string;
+  passwordType?: boolean;
 }
 
 export interface FormRadioGroupProps {
