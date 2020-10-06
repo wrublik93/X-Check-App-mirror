@@ -33,10 +33,10 @@ export const headerLinks: HeaderDataProps[] = [
     name: 'Reviews',
     link: '/reviews',
   },
-  {
+  /* {
     name: 'About Us',
     link: '/aboutUs',
-  },
+  }, */
 ];
 
 export const logInInputs: FormInputProps[] = [
@@ -49,6 +49,7 @@ export const logInInputs: FormInputProps[] = [
       type: 'email',
       message: 'Please input your email!',
     },
+    type: 'email',
   },
   {
     label: 'Password',
@@ -59,6 +60,7 @@ export const logInInputs: FormInputProps[] = [
       type: 'string',
       message: 'Please input your password!',
     },
+    passwordType: true,
   },
 ];
 
@@ -67,6 +69,7 @@ export const signUpInputs: FormInputProps[] = [
     label: 'Email',
     name: 'email',
     placeholder: 'Input your email...',
+    type: 'email',
     rules: {
       required: true,
       type: 'email',
@@ -82,6 +85,7 @@ export const signUpInputs: FormInputProps[] = [
       type: 'string',
       message: 'Please input your password!',
     },
+    passwordType: true,
   },
   {
     label: 'First name',
@@ -150,4 +154,8 @@ export const signUpRadios: FormRadioGroupProps[] = [
 
 export const logInSubmit: FormButtonSubmit = {
   name: 'logInSubmit',
+};
+
+export const signUpSubmit: FormButtonSubmit = {
+  name: 'signUpSubmit',
 };
