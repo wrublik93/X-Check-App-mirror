@@ -5,13 +5,17 @@ export const modalsSlice = createSlice({
   initialState: {
     openLogIn: false,
     openSignUp: false,
+    startSpin: false,
   },
   reducers: {
-    openLogInWindow(state) {
-      state.openLogIn = !state.openLogIn;
+    openLogInWindow(state, action) {
+      state.openLogIn = action.payload as boolean;
     },
-    openSignUpWindow(state) {
-      state.openSignUp = !state.openSignUp;
+    openSignUpWindow(state, action) {
+      state.openSignUp = action.payload as boolean;
+    },
+    startSpin(state, action) {
+      state.startSpin = action.payload as boolean;
     },
   },
 });

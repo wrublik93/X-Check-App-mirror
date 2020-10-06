@@ -1,4 +1,3 @@
 import { modalsSlice } from '@/store/reducers/modals';
 
-// eslint-disable-next-line import/prefer-default-export
-export const { openLogInWindow, openSignUpWindow } = modalsSlice.actions;
+export const { openLogInWindow, openSignUpWindow, startSpin } = modalsSlice.actions;
