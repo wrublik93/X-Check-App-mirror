@@ -72,6 +72,7 @@ const Forms: FunctionComponent<FormArgs> = ({
   formButtonSubmitName,
 }) => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies(['userAppCheck']);
   const successAlert = useSelector((state: RootState) => state.alerts.successAlert);
   const successText = useSelector((state: RootState) => state.alerts.successText);
@@ -105,6 +106,7 @@ const Forms: FunctionComponent<FormArgs> = ({
           dispatch(startSpin(false));
           dispatch(changeSuccessAlert(false));
           dispatch(changeSuccessText(''));
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           setCookies('userAppCheck', user[0].email);
           dispatch(openLogInWindow(false));
           localStorage.setItem('logInCheck', 'yes');
@@ -181,26 +183,26 @@ const Forms: FunctionComponent<FormArgs> = ({
   ));
   const listRadioGroupItems = formRadioGroupList
     ? formRadioGroupList.map((radioGroupItem, index: number) => (
-        <Form.Item
-          key={keyRadio ? keyRadio[index] : undefined}
-          label={radioGroupItem.label}
-          name={radioGroupItem.name}
-          rules={[
-            {
-              required: radioGroupItem.rules.required,
-              message: radioGroupItem.rules.message,
-            },
-          ]}
-        >
-          <Radio.Group>
-            {radioGroupItem.radioButtonInput.map((radioButtonItem) => (
-              <Radio.Button key={radioButtonItem.name} value={radioButtonItem.value}>
-                {radioButtonItem.name}
-              </Radio.Button>
-            ))}
-          </Radio.Group>
-        </Form.Item>
-      ))
+      <Form.Item
+        key={keyRadio ? keyRadio[index] : undefined}
+        label={radioGroupItem.label}
+        name={radioGroupItem.name}
+        rules={[
+          {
+            required: radioGroupItem.rules.required,
+            message: radioGroupItem.rules.message,
+          },
+        ]}
+      >
+        <Radio.Group>
+          {radioGroupItem.radioButtonInput.map(radioButtonItem => (
+            <Radio.Button key={radioButtonItem.name} value={radioButtonItem.value}>
+              {radioButtonItem.name}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </Form.Item>
+    ))
     : undefined;
   return (
     <div>
