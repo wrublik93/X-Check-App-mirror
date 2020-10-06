@@ -11,13 +11,13 @@ import { store } from '@/store/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <CookiesProvider>
+    <CookiesProvider>
+      <BrowserRouter>
         <Provider store={store}>
           <App />
         </Provider>
-      </CookiesProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('app')
 );

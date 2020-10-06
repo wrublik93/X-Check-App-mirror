@@ -1,5 +1,12 @@
 import {
-  Course, User, Task, TaskStatus, TaskCategories, Role,
+  Course,
+  User,
+  Task,
+  TaskStatus,
+  TaskCategories,
+  Role,
+  Session,
+  Review,
 } from '@/types/entities';
 import {
   LoginUserArgs,
@@ -90,7 +97,7 @@ export const createUser = async ({
   lastName,
   email,
   password,
-  currentCourseIds,
+  /* currentCourseIds, */
   roleIds,
 }: CreateUserArgs): Promise<User | boolean> => {
   const registered = await checkEmail({ email });
@@ -108,7 +115,7 @@ export const createUser = async ({
         lastName,
         email,
         password,
-        currentCourseIds,
+        /* currentCourseIds, */
         roleIds,
         token: tokenDecode,
       }),
@@ -375,4 +382,43 @@ export const getTaskCategories = async (): Promise<TaskCategories> => {
     },
   });
   return rawResponse.json() as Promise<TaskCategories>;
+};
+
+/** Get sessions */
+export const getSessions = async (): Promise<Session> => {
+  const entity = 'sessions';
+  const rawResponse = await fetch(`${url}${entity}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<Session>;
+};
+
+/** Get reviews */
+export const getReviews = async (): Promise<Review> => {
+  const entity = 'reviews';
+  const rawResponse = await fetch(`${url}${entity}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<Review>;
+};
+
+/** Get role by name */
+export const getRoleByName = async ({ name }: GetRoleArgs): Promise<Role> => {
+  const entity = 'roles';
+  const rawResponse = await fetch(`${url}${entity}?name=${name}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<Role>;
 };

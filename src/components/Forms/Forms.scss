@@ -1,0 +1,26 @@
+.form-main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.form-input-password {
+  width: 95%;
+}
+
+@media (max-width: 574px) {
+  .form-input-password {
+    width: 94%;
+  }
+}
+
+@media (max-width: 442px) {
+  .form-input-password {
+    width: 92%;
+  }
+}
+
+.spin-forms {
+  margin-bottom: 10px;
+}

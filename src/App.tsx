@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import {
   Redirect, Route, Switch, useHistory,
 } from 'react-router-dom';
@@ -22,6 +23,8 @@ const handleChange = (routeName: string) => {
 
 const App = (): JSX.Element => {
   const history = useHistory();
+  const [cookies] = useCookies(['userAppCheck']);
+
   useEffect(
     () => history.listen(location => {
       handleChange(location.pathname);
@@ -31,18 +34,20 @@ const App = (): JSX.Element => {
 
   return (
     <div>
-      <Header headerLinksList={headerLinks} />
+      {cookies.userAppCheck && <Header headerLinksList={headerLinks} />}
       <Main>
         <Switch>
-          <Route exact path="/" component={Registration} />
-          <Route path="/home" component={Home} />
-          <Route path="/tasks" component={Tasks} />
-          <Route path="/reviews" component={Reviews} />
-          <Route path="/reviewRequests" component={ReviewRequests} />
-          <Route path="/aboutUs" component={AboutUs} />
-          <Route path="/404" component={NotFoundPage} />
+          <Route exact path="/" component={Registration}>
+            {cookies.userAppCheck && <Redirect to="/home" />}
+          </Route>
+          {cookies.userAppCheck && <Route path="/home" component={Home} />}
+          {cookies.userAppCheck && <Route path="/tasks" component={Tasks} />}
+          {cookies.userAppCheck && <Route path="/reviews" component={Reviews} />}
+          {cookies.userAppCheck && <Route path="/reviewRequests" component={ReviewRequests} />}
+          {cookies.userAppCheck && <Route path="/aboutUs" component={AboutUs} />}
+          {cookies.userAppCheck && <Route path="/404" component={NotFoundPage} />}
           <Route path="*">
-            <Redirect to="/404" />
+            {cookies.userAppCheck ? <Redirect to="/404" /> : <Redirect to="/" />}
           </Route>
         </Switch>
       </Main>

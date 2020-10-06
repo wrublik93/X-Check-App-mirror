@@ -26,8 +26,8 @@ export interface User {
   password: string;
   githubId: string;
   githubToken: string;
-  currentCourseIds: number[];
-  roleIds: number[];
+  /* currentCourseIds?: number[]; */
+  roleIds?: number[];
 }
 
 export interface Course extends Entity, DatePeriod {
