@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Header from '@/components/Header';
+import TasksTable from '@/components/Table';
 import { routeNamesMap, headerLinks } from '@/constants/constants';
 import AboutUs from '@/views/AboutUs';
 import Home from '@/views/Home';
@@ -13,7 +14,6 @@ import NotFoundPage from '@/views/NotFoundPage';
 import Registration from '@/views/Registration';
 import ReviewRequests from '@/views/ReviewRequests';
 import Reviews from '@/views/Reviews';
-import Tasks from '@/views/Tasks';
 
 const handleChange = (routeName: string) => {
   if (routeName) {
@@ -41,7 +41,7 @@ const App = (): JSX.Element => {
             {cookies.userAppCheck && <Redirect to="/home" />}
           </Route>
           {cookies.userAppCheck && <Route path="/home" component={Home} />}
-          {cookies.userAppCheck && <Route path="/tasks" component={Tasks} />}
+          {cookies.userAppCheck && <Route path="/tasks" component={TasksTable} />}
           {cookies.userAppCheck && <Route path="/reviews" component={Reviews} />}
           {cookies.userAppCheck && <Route path="/reviewRequests" component={ReviewRequests} />}
           {cookies.userAppCheck && <Route path="/aboutUs" component={AboutUs} />}
