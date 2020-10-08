@@ -7,7 +7,8 @@ export const coursesSlice = createSlice({
   },
   reducers: {
     getAllCourses(state, action) {
-      state.courses = state.courses.concat(action.payload);
+      const arrayCourses: [] = [];
+      state.courses = arrayCourses.concat(action.payload);
     },
   },
 });

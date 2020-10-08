@@ -7,7 +7,8 @@ export const rolesSlice = createSlice({
   },
   reducers: {
     getAllRoles(state, action) {
-      state.roles = state.roles.concat(action.payload);
+      const arrayRoles: [] = [];
+      state.roles = arrayRoles.concat(action.payload);
     },
   },
 });

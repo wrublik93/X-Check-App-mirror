@@ -206,7 +206,12 @@ const Forms: FunctionComponent<FormArgs> = ({
     : undefined;
   return (
     <div>
-      <Form className={styles['form-main']} name={formInfo.nameForm} onFinish={onFinish}>
+      <Form
+        className={styles['form-main']}
+        name={formInfo.nameForm}
+        onFinish={onFinish}
+        layout="vertical"
+      >
         {listInputItems}
         {listRadioGroupItems}
         <Form.Item className={styles['form-main']}>

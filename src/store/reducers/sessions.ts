@@ -7,7 +7,8 @@ export const sessionsSlice = createSlice({
   },
   reducers: {
     getAllSessions(state, action) {
-      state.sessions = state.sessions.concat(action.payload);
+      const arraySessions: [] = [];
+      state.sessions = arraySessions.concat(action.payload);
     },
   },
 });

@@ -6,6 +6,11 @@ export const modalsSlice = createSlice({
     openLogIn: false,
     openSignUp: false,
     startSpin: false,
+    viewCoursesSpin: false,
+    viewUsersSpin: false,
+    openAddCourse: false,
+    openCoursesTable: false,
+    openUsersTable: false,
   },
   reducers: {
     openLogInWindow(state, action) {
@@ -16,6 +21,21 @@ export const modalsSlice = createSlice({
     },
     startSpin(state, action) {
       state.startSpin = action.payload as boolean;
+    },
+    startViewCoursesSpin(state, action) {
+      state.viewCoursesSpin = action.payload as boolean;
+    },
+    startViewUsersSpin(state, action) {
+      state.viewUsersSpin = action.payload as boolean;
+    },
+    openAddCourseWindow(state, action) {
+      state.openAddCourse = action.payload as boolean;
+    },
+    openViewCoursesTable(state, action) {
+      state.openCoursesTable = action.payload as boolean;
+    },
+    openViewUsersTable(state, action) {
+      state.openUsersTable = action.payload as boolean;
     },
   },
 });

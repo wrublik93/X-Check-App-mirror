@@ -7,7 +7,8 @@ export const tasksSlice = createSlice({
   },
   reducers: {
     getAllTasks(state, action) {
-      state.tasks = state.tasks.concat(action.payload);
+      const arrayTasks: [] = [];
+      state.tasks = arrayTasks.concat(action.payload);
     },
   },
 });
