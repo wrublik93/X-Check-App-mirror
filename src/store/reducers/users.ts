@@ -13,7 +13,8 @@ export const usersSlice = createSlice({
       state.userCurrent = { ...(action.payload as User) };
     },
     getAllUsers(state, action) {
-      state.users = state.users.concat(action.payload);
+      const arrayUsers: [] = [];
+      state.users = arrayUsers.concat(action.payload);
     },
   },
 });

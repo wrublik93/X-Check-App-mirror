@@ -7,7 +7,8 @@ export const reviewsSlice = createSlice({
   },
   reducers: {
     getAllReviews(state, action) {
-      state.reviews = state.reviews.concat(action.payload);
+      const arrayCReviews: [] = [];
+      state.reviews = arrayCReviews.concat(action.payload);
     },
   },
 });
