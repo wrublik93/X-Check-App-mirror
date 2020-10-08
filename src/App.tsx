@@ -15,6 +15,8 @@ import ReviewRequests from '@/views/ReviewRequests';
 import Reviews from '@/views/Reviews';
 import Tasks from '@/views/Tasks';
 
+import 'antd/dist/antd.css';
+
 const handleChange = (routeName: string) => {
   if (routeName) {
     document.title = routeNamesMap[routeName] as string;
