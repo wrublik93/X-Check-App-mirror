@@ -34,8 +34,8 @@ export interface CreateCourseArgs {
   name: string;
   fullName: string;
   description: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   completed: boolean;
 }
 
