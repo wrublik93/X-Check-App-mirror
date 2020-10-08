@@ -1,4 +1,33 @@
-.home {
-  font-size: 2.4rem;
-  color: brown;
+.home-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.card-main {
+  width: 18rem;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.home-card-button {
+  width: 7rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-add-course {
+  text-align: center;
+}
+
+.table-container {
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
 }
