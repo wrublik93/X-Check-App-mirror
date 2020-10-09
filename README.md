@@ -1,5 +1,21 @@
 # X Check App / RS Assessment Tool
 
+## Self-check
+
+  * Упрощённая страница/окно авторизации. +10 
+  * Страница со списком задач (tasks). +10
+  * Форма (на отдельной странице или в окне) создания и редактирования задачи. +20 
+  * Главная страница со ссылками на остальные доступные страницы ИЛИ всегда видимое меню для навигации. +10
+  * Объединение требований в категории (basic scope, advanced, etc). +10
+  * Каждое действие, меняющее данные, доступно только при наличии у пользователя соответствующей роли. Набор ролей можно взять из примера или придумать свои. Ограничения должны быть описаны в README. Если выбор роли недоступен при логине или регистрации, тогда в исходной базе (db.json) должны быть тестовые пользователи с каждой из ролей, а их логины и пароли должны быть в README. +30 
+  * В исходной базе (db.json) есть примеры сущностей каждого типа. +10
+  * В исходной базе (db.json) воспроизведено задание [xcheck](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md). +5 
+  * README файл в репозитории с описанием используемых технологий, инструкцией для начала разработки и для деплоя продакшн версии. +20
+  * Использован eslint preset (не обязательно airbnb) и нет предупреждений и ошибок. +20
+  * В репозитории есть "следы" активной командной работы - комментарии в пулл реквестах. +10  
+  
+  __SCORE:__ 155 баллов
+
 ## Links
 
 1. Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
@@ -37,11 +53,11 @@ We use:
 ## Roles
 
 In our app we use next roles:
-1. admin;
-2. trainer;
-3. mentor;
-4. activist;
-5. student.
+1. admin (add courses, add tasks, add criterions, view users, view courses, view tasks);
+2. trainer (add courses, add tasks, add criterions, view users, view courses, view tasks);
+3. mentor (add courses, add tasks, add criterions, view users, view courses, view tasks);
+4. activist (view users, view courses, view tasks);
+5. student (view users, view courses, view tasks).
 
 ## Logins and Passwords
 
