@@ -7,6 +7,9 @@ import {
   Role,
   Session,
   Review,
+  Criterion,
+  CriterionCategories,
+  CriterionSearch,
 } from '@/types/entities';
 import {
   LoginUserArgs,
@@ -141,6 +144,7 @@ export const getRoles = async (): Promise<Role> => {
 /** Get role by id */
 export const getRoleById = async ({ id }: GetRoleArgs): Promise<Role> => {
   const entity = 'roles';
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const rawResponse = await fetch(`${url}${entity}/${id}`, {
     method: 'GET',
     headers: {
@@ -314,13 +318,14 @@ export const createTask = async ({
   taskStatusId,
   taskCategoryId,
   criterionsCategoriesOrder,
+  criterionsIds,
 }: CreateTaskArgs): Promise<Task | boolean> => {
   const registered = await checkTask({ name });
   const entity = 'tasks';
   if (!registered) {
-    if (!criterionsCategoriesOrder.length) {
-      criterionsCategoriesOrder.push(0, 1, 2, 3);
-    }
+    /* if (!criterionsCategoriesOrder.length) {
+      criterionsCategoriesOrder.push(0);
+    } */
     const rawResponse = await fetch(`${url}${entity}`, {
       method: 'POST',
       headers: {
@@ -337,6 +342,7 @@ export const createTask = async ({
         taskStatusId,
         taskCategoryId,
         criterionsCategoriesOrder,
+        criterionsIds,
       }),
     });
     return rawResponse.json() as Promise<Task>;
@@ -413,6 +419,7 @@ export const getReviews = async (): Promise<Review> => {
 /** Get role by name */
 export const getRoleByName = async ({ name }: GetRoleArgs): Promise<Role> => {
   const entity = 'roles';
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const rawResponse = await fetch(`${url}${entity}?name=${name}`, {
     method: 'GET',
     headers: {
@@ -421,4 +428,77 @@ export const getRoleByName = async ({ name }: GetRoleArgs): Promise<Role> => {
     },
   });
   return rawResponse.json() as Promise<Role>;
+};
+
+/** Get criterions */
+export const getCriterions = async (): Promise<Criterion> => {
+  const entity = 'criterions';
+  const rawResponse = await fetch(`${url}${entity}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<Criterion>;
+};
+
+export const getCriterionCategories = async (): Promise<CriterionCategories> => {
+  const entity = 'criterionCategories';
+  const rawResponse = await fetch(`${url}${entity}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return rawResponse.json() as Promise<CriterionCategories>;
+};
+
+export const createCriterion = async ({
+  nameTask,
+  minScore,
+  maxScore,
+  categoryCriterionId,
+  title,
+  description,
+  onlyForMentor,
+}: Criterion): Promise<Criterion> => {
+  /* const registered = await checkTask({ name }); */
+  const entity = 'criterions';
+  const rawResponse = await fetch(`${url}${entity}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      nameTask,
+      minScore,
+      maxScore,
+      categoryCriterionId,
+      title,
+      description,
+      onlyForMentor,
+    }),
+  });
+  return rawResponse.json() as Promise<Criterion>;
+};
+
+export const getCriterionNameCategory = async ({
+  nameTask,
+  categoryCriterionId,
+}: CriterionSearch): Promise<Criterion> => {
+  const entity = 'criterions';
+  const rawResponse = await fetch(
+    `${url}${entity}?name=${nameTask}&categoryCriterionId=${categoryCriterionId}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return rawResponse.json() as Promise<Criterion>;
 };

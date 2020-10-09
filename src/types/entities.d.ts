@@ -27,7 +27,7 @@ export interface User {
   githubId: string;
   githubToken: string;
   /* currentCourseIds?: number[]; */
-  roleIds?: number[];
+  roleIds: number[];
 }
 
 export interface Course extends Entity, DatePeriod {
@@ -71,23 +71,28 @@ export interface Pairs {
 export interface Task extends Entity {
   description: string;
   descriptionURL: string;
-  createdDate: Date;
-  updatedDate: Date;
+  createdDate: string;
+  updatedDate: string;
   authorId: number;
   taskStatusId: number;
   taskCategoryId: number;
   criterionsCategoriesOrder: number[];
-  criterionsIds: number[];
+  criterionsIds: number[] | [];
 }
 
 export interface Criterion {
-  id: number;
+  nameTask: string;
   minScore: number;
   maxScore: number;
   categoryCriterionId: number;
   title: string;
   description: string;
   onlyForMentor: boolean;
+}
+
+export interface CriterionSearch {
+  nameTask: string;
+  categoryCriterionId: number;
 }
 
 export interface ReviewRequest {

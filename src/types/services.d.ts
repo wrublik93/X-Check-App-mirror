@@ -52,13 +52,13 @@ export interface CreateTaskArgs {
   name: string;
   description: string;
   descriptionURL: string;
-  createdDate: Date;
-  updatedDate: Date;
+  createdDate: string;
+  updatedDate: string;
   authorId: number;
   taskStatusId: number;
   taskCategoryId: number;
-  criterionsCategoriesOrder: number[];
-  criterionsIds?: number[];
+  criterionsCategoriesOrder: number[] | [];
+  criterionsIds: number[] | [];
 }
 
 export interface GetRoleArgs {
