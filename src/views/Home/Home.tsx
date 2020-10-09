@@ -12,7 +12,7 @@ import Tag from 'antd/lib/tag';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createCourse, getCourses, getUsers } from '@/services/services';
+import { createCourse, getCourses, getUsers, createTask, getTasks } from '@/services/services';
 import logoRS from '@/static/images/logo-rs.svg';
 import {
   changeSuccessAlert,
@@ -23,15 +23,17 @@ import {
 import { getAllCourses } from '@/store/actions/courses';
 import {
   openAddCourseWindow,
+  openAddTaskWindow,
   startSpin,
   openViewCoursesTable,
   startViewCoursesSpin,
   openViewUsersTable,
   startViewUsersSpin,
 } from '@/store/actions/modals';
+import { getAllTasks } from '@/store/actions/tasks';
 import { getAllUsers } from '@/store/actions/users';
 import { RootState } from '@/store/store';
-import { Role, User } from '@/types/entities';
+import { Entity, Role, User } from '@/types/entities';
 import styles from '@/views/Home/Home.scss';
 
 const { Column, ColumnGroup } = Table;
@@ -43,12 +45,22 @@ const { TextArea } = Input;
 const { Meta } = Card;
 
 const Home = (): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const currentDate = new Date();
   const currentUser: User = useSelector((state: RootState) => state.users.userCurrent as User);
   // eslint-disable-next-line max-len
   const currentRole: Role = useSelector(
-    (state: RootState) => state.roles.roles[currentUser.id] as Role
+    (state: RootState) => state.roles.roles[currentUser.roleIds[0]] as Role
+  );
+  // eslint-disable-next-line max-len
+  const taskStatusOptions: Entity[] = useSelector((state: RootState) => state.tasks.taskStatuses);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line max-len
+  const taskCategoryOptions: Entity[] = useSelector(
+    (state: RootState) => state.tasks.tasksCategories
   );
   const addCourse = useSelector((state: RootState) => state.modals.openAddCourse);
+  const addTask = useSelector((state: RootState) => state.modals.openAddTask);
   const dispatch = useDispatch();
   const successAlert = useSelector((state: RootState) => state.alerts.successAlert);
   const successText = useSelector((state: RootState) => state.alerts.successText);
@@ -62,6 +74,9 @@ const Home = (): JSX.Element => {
   const rolesUser: Role[] = useSelector((state: RootState) => state.roles.roles);
   const handleClickAddCourse = () => {
     dispatch(openAddCourseWindow(true));
+  };
+  const handleClickAddTask = () => {
+    dispatch(openAddTaskWindow(true));
   };
   const handleClickViewCourse = async () => {
     dispatch(openViewCoursesTable(true));
@@ -100,6 +115,9 @@ const Home = (): JSX.Element => {
       case 'student':
         return 'cyan';
         break;
+      case 'activist':
+        return 'volcano';
+        break;
       default:
         return 'white';
         break;
@@ -117,6 +135,50 @@ const Home = (): JSX.Element => {
     completed: boolean;
   }
 
+  interface SubmitAddTaskArgs {
+    name: string;
+    description: string;
+    descriptionURL: string;
+    authorId: number;
+    taskStatusId: number;
+    taskCategoryId: number;
+  }
+
+  const submitAddTask = async (values: SubmitAddTaskArgs) => {
+    const date = new Date();
+    dispatch(changeSuccessAlert(false));
+    dispatch(changeErrorAlert(false));
+    dispatch(startSpin(true));
+    const newTask = await createTask({
+      name: values.name,
+      description: values.description,
+      descriptionURL: values.descriptionURL,
+      createdDate: date.toISOString().substring(0, 10),
+      updatedDate: date.toISOString().substring(0, 10),
+      authorId: currentUser.id,
+      taskStatusId: values.taskStatusId,
+      taskCategoryId: values.taskCategoryId,
+      criterionsCategoriesOrder: [0, 1, 2, 3],
+      criterionsIds: [],
+    });
+    if (newTask) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      const tasksGet = await getTasks();
+      dispatch(getAllTasks(tasksGet));
+      dispatch(changeSuccessAlert(true));
+      dispatch(changeSuccessText('Task created! Redirecting...'));
+      setTimeout(() => {
+        dispatch(startSpin(false));
+        dispatch(changeSuccessAlert(false));
+        dispatch(changeSuccessText(''));
+        dispatch(openAddTaskWindow(false));
+      }, 3000);
+    } else {
+      dispatch(startSpin(false));
+      dispatch(changeErrorText('Task exists. Please try again!'));
+      dispatch(changeErrorAlert(true));
+    }
+  };
   const submitAddCourse = async (values: SubmitAddCourseArgs) => {
     dispatch(changeSuccessAlert(false));
     dispatch(changeErrorAlert(false));
@@ -158,15 +220,15 @@ const Home = (): JSX.Element => {
             description={currentUser.email}
           />
           <p>
-            <strong>Role:</strong>
-            {' '}
-            {currentRole.name}
+            <strong>Role:</strong> {currentRole.name}
           </p>
           <div className={styles['home-card-buttons-container']}>
             <Button className={styles['home-card-button']} onClick={handleClickAddCourse}>
               Add course
             </Button>
-            <Button className={styles['home-card-button']}>Add task</Button>
+            <Button className={styles['home-card-button']} onClick={handleClickAddTask}>
+              Add task
+            </Button>
           </div>
           <div className={styles['home-card-buttons-container']}>
             <Button className={styles['home-card-button']} onClick={handleClickViewCourse}>
@@ -250,65 +312,71 @@ const Home = (): JSX.Element => {
           </div>
         </Modal>
         <Modal
-          visible={addCourse}
+          visible={addTask}
           onCancel={() => {
-            dispatch(openAddCourseWindow(false));
+            dispatch(openAddTaskWindow(false));
             dispatch(changeSuccessAlert(false));
             dispatch(changeErrorAlert(false));
           }}
-          title="Add course"
+          title="Add task"
           footer={null}
         >
           <div>
-            <Form name="addCourse" layout="vertical" onFinish={submitAddCourse}>
+            <Form name="addTask" layout="vertical" onFinish={submitAddTask}>
               <Form.Item
                 label="Name"
                 name="name"
-                rules={[{ required: true, message: 'Please input name course!' }]}
+                rules={[{ required: true, message: 'Please input name task!' }]}
               >
                 <Input placeholder="Input name course..." />
               </Form.Item>
               <Form.Item
-                label="Full name"
-                name="fullName"
-                rules={[{ required: true, message: 'Please input full name course!' }]}
+                label="Description"
+                name="description"
+                rules={[{ required: true, message: 'Please input description task!' }]}
               >
                 <Input placeholder="Input full name course..." />
               </Form.Item>
               <Form.Item
-                label="Description"
-                name="description"
-                rules={[{ required: true, message: 'Please input description course!' }]}
+                label="Description URL"
+                name="descriptionURL"
+                rules={[{ required: true, message: 'Please input description URL task!' }]}
               >
-                <TextArea placeholder="Input description course..." />
+                <TextArea placeholder="Input description URL task..." />
               </Form.Item>
-              <Form.Item
-                label="Start Date"
-                name="startDate"
-                rules={[{ required: true, message: 'Please select start date!' }]}
+              {/* <Form.Item
+                className={styles['visible-author']}
+                label="Author"
+                name="authorId"
+                rules={[{ required: false, message: 'Please select completed course!' }]}
               >
-                <DatePicker className={styles['date-picker']} format={dateFormat} />
-              </Form.Item>
+                <Input defaultValue={currentUser.id} disabled />
+              </Form.Item> */}
               <Form.Item
-                label="End Date"
-                name="endDate"
-                rules={[{ required: true, message: 'Please select end date!' }]}
-              >
-                <DatePicker className={styles['date-picker']} format={dateFormat} />
-              </Form.Item>
-              <Form.Item
-                label="Course completed"
-                name="completed"
-                rules={[{ required: true, message: 'Please select completed course!' }]}
+                label="Task status"
+                name="taskStatusId"
+                rules={[{ required: true, message: 'Please select task status!' }]}
               >
                 <Select>
-                  <Option value={0}>No</Option>
-                  <Option value={1}>Yes</Option>
+                  {taskStatusOptions.map((item) => (
+                    <Option value={item.id}>{item.name}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Task category"
+                name="taskCategoryId"
+                rules={[{ required: true, message: 'Please select task category!' }]}
+              >
+                <Select>
+                  {taskCategoryOptions.map((item) => (
+                    <Option value={item.id}>{item.name}</Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item className={styles['form-add-course']}>
                 <Button type="primary" htmlType="submit">
-                  Add course
+                  Add task
                 </Button>
               </Form.Item>
             </Form>
@@ -345,7 +413,7 @@ const Home = (): JSX.Element => {
                   title="Completed"
                   dataIndex="completed"
                   key="completed"
-                  render={completed => (
+                  render={(completed) => (
                     <div>
                       {completed ? (
                         <Tag color="red" key="completed">
