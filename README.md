@@ -2,12 +2,13 @@
 
 ## Links
 
-1. Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
-2. Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
-3. Link to demo: https://x-check-app-team25.netlify.app/
+1. Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
+2. Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
+3. Link to Figma (prototype app): https://www.figma.com/file/BG0hwI39ovaQnOrCTn9qkG/RSSchool-X-Check
+4. Link to demo: https://x-check-app-team25.netlify.app/
 
 ## RACI
-Здесь вставим матрицу.
+![Imgur](https://i.imgur.com/cvZ2Bi7.png)
 
 ## Organization our work
 
@@ -24,8 +25,9 @@ We use:
 - __lint-staged__ - запуск скриптов только для коммитов со статусом staged
 - __husky__ - использование хуков гита для коммитов
 - __react__ - JavaScript-библиотека для создания пользовательских интерфейсов
+- __redux-toolkit__ - Redux Toolkit
 - __typescript__ - TypeScript extends JavaScript by adding types (типизация)
-- __react-router__ - маршрутизация приложения
+- __react-router-dom__ - маршрутизация приложения
 - __react-cookie__ - куки
 - __classnames__ - для использования множественных классов
 - __node-sass__ - для использования Sass
