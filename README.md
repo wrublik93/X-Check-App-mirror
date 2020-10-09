@@ -7,7 +7,7 @@ Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/x
 Link to demo: https://x-check-app-team25.netlify.app/
 
 ## RACI
-Здесь вставим матрицу
+Здесь вставим матрицу.
 
 ## Organization our work
 
