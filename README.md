@@ -2,9 +2,9 @@
 
 ## Links
 
-Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
-Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
-Link to demo: https://x-check-app-team25.netlify.app/
+1. Link to Heroku: https://x-check-app-server-team25.herokuapp.com/
+2. Link to task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/xcheck/xcheck.md
+3. Link to demo: https://x-check-app-team25.netlify.app/
 
 ## RACI
 Здесь вставим матрицу.
