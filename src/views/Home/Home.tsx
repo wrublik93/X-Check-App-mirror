@@ -12,7 +12,9 @@ import Tag from 'antd/lib/tag';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createCourse, getCourses, getUsers, createTask, getTasks } from '@/services/services';
+import {
+  createCourse, getCourses, getUsers, createTask, getTasks,
+} from '@/services/services';
 import logoRS from '@/static/images/logo-rs.svg';
 import {
   changeSuccessAlert,
@@ -52,6 +54,7 @@ const Home = (): JSX.Element => {
   const currentRole: Role = useSelector(
     (state: RootState) => state.roles.roles[currentUser.roleIds[0]] as Role
   );
+  const currentRoleName = currentRole.name;
   // eslint-disable-next-line max-len
   const taskStatusOptions: Entity[] = useSelector((state: RootState) => state.tasks.taskStatuses);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -73,12 +76,17 @@ const Home = (): JSX.Element => {
   const viewUsersTable = useSelector((state: RootState) => state.modals.openUsersTable);
   const rolesUser: Role[] = useSelector((state: RootState) => state.roles.roles);
   const handleClickAddCourse = () => {
+    dispatch(openViewCoursesTable(false));
+    dispatch(openViewUsersTable(false));
     dispatch(openAddCourseWindow(true));
   };
   const handleClickAddTask = () => {
+    dispatch(openViewCoursesTable(false));
+    dispatch(openViewUsersTable(false));
     dispatch(openAddTaskWindow(true));
   };
   const handleClickViewCourse = async () => {
+    dispatch(openViewUsersTable(false));
     dispatch(openViewCoursesTable(true));
     dispatch(startViewCoursesSpin(true));
     const addCoursesStore = await getCourses();
@@ -86,6 +94,7 @@ const Home = (): JSX.Element => {
     dispatch(startViewCoursesSpin(false));
   };
   const handleClickViewUsers = async () => {
+    dispatch(openViewCoursesTable(false));
     dispatch(openViewUsersTable(true));
     dispatch(startViewUsersSpin(true));
     const addUsersStore = await getUsers();
@@ -220,16 +229,20 @@ const Home = (): JSX.Element => {
             description={currentUser.email}
           />
           <p>
-            <strong>Role:</strong> {currentRole.name}
+            <strong>Role:</strong>
+            {' '}
+            {currentRole.name}
           </p>
-          <div className={styles['home-card-buttons-container']}>
-            <Button className={styles['home-card-button']} onClick={handleClickAddCourse}>
-              Add course
-            </Button>
-            <Button className={styles['home-card-button']} onClick={handleClickAddTask}>
-              Add task
-            </Button>
-          </div>
+          {(currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor') && (
+            <div className={styles['home-card-buttons-container']}>
+              <Button className={styles['home-card-button']} onClick={handleClickAddCourse}>
+                Add course
+              </Button>
+              <Button className={styles['home-card-button']} onClick={handleClickAddTask}>
+                Add task
+              </Button>
+            </div>
+          )}
           <div className={styles['home-card-buttons-container']}>
             <Button className={styles['home-card-button']} onClick={handleClickViewCourse}>
               View courses
@@ -335,14 +348,14 @@ const Home = (): JSX.Element => {
                 name="description"
                 rules={[{ required: true, message: 'Please input description task!' }]}
               >
-                <Input placeholder="Input full name course..." />
+                <TextArea placeholder="Input description task..." />
               </Form.Item>
               <Form.Item
                 label="Description URL"
                 name="descriptionURL"
                 rules={[{ required: true, message: 'Please input description URL task!' }]}
               >
-                <TextArea placeholder="Input description URL task..." />
+                <Input placeholder="Input description URL task..." />
               </Form.Item>
               {/* <Form.Item
                 className={styles['visible-author']}
@@ -357,8 +370,8 @@ const Home = (): JSX.Element => {
                 name="taskStatusId"
                 rules={[{ required: true, message: 'Please select task status!' }]}
               >
-                <Select>
-                  {taskStatusOptions.map((item) => (
+                <Select placeholder="Select task status...">
+                  {taskStatusOptions.map(item => (
                     <Option value={item.id}>{item.name}</Option>
                   ))}
                 </Select>
@@ -368,8 +381,8 @@ const Home = (): JSX.Element => {
                 name="taskCategoryId"
                 rules={[{ required: true, message: 'Please select task category!' }]}
               >
-                <Select>
-                  {taskCategoryOptions.map((item) => (
+                <Select placeholder="Select category task...">
+                  {taskCategoryOptions.map(item => (
                     <Option value={item.id}>{item.name}</Option>
                   ))}
                 </Select>
@@ -413,7 +426,7 @@ const Home = (): JSX.Element => {
                   title="Completed"
                   dataIndex="completed"
                   key="completed"
-                  render={(completed) => (
+                  render={completed => (
                     <div>
                       {completed ? (
                         <Tag color="red" key="completed">

@@ -1,6 +1,7 @@
 import Alert from 'antd/lib/alert';
 import Button from 'antd/lib/button';
 import Card from 'antd/lib/card';
+import Collapse from 'antd/lib/collapse';
 import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
 import InputNumber from 'antd/lib/input-number';
@@ -19,12 +20,15 @@ import { RootState } from '@/store/store';
 import {
   Criterion,
   CriterionCategories,
+  Role,
   Task,
   TaskCategories,
   TaskStatus,
   User,
 } from '@/types/entities';
 import styles from '@/views/Tasks/Tasks.scss';
+
+const { Panel } = Collapse;
 
 const { Option } = Select;
 
@@ -59,6 +63,11 @@ interface ValuesCriterions {
 }
 
 const Tasks = (): JSX.Element => {
+  const currentUser: User = useSelector((state: RootState) => state.users.userCurrent as User);
+  const currentRole: Role = useSelector(
+    (state: RootState) => state.roles.roles[currentUser.roleIds[0]] as Role
+  );
+  const currentRoleName = currentRole.name;
   const successAlert = useSelector((state: RootState) => state.alerts.successAlert);
   const successText = useSelector((state: RootState) => state.alerts.successText);
   const criterionSpin = useSelector((state: RootState) => state.modals.addCriterionSpin);
@@ -147,15 +156,17 @@ const Tasks = (): JSX.Element => {
   return (
     <div className={styles['tasks-main']}>
       <h1 className={styles['button-add-criterion']}>Tasks</h1>
-      <div className={styles['button-add-criterion']}>
-        <Button
-          onClick={() => {
-            dispatch(openAddCriterionWindow(true));
-          }}
-        >
-          Add Criterion
-        </Button>
-      </div>
+      {(currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor') && (
+        <div className={styles['button-add-criterion']}>
+          <Button
+            onClick={() => {
+              dispatch(openAddCriterionWindow(true));
+            }}
+          >
+            Add Criterion
+          </Button>
+        </div>
+      )}
       <Table
         scroll={{ x: 400 }}
         columns={columns}
@@ -166,118 +177,138 @@ const Tasks = (): JSX.Element => {
               <p>{record.description}</p>
               <h3>Description Link:</h3>
               <a href={`${record.descriptionURL}`}>{record.descriptionURL}</a>
-              <hr />
-              <h3>Basic Scope</h3>
-              <hr />
-              {storeCriterions.map(item => {
-                if (item.nameTask === record.name && item.categoryCriterionId === 0) {
-                  return (
-                    <Card title={item.title} bordered={false} style={{ margin: 10 }}>
-                      <p>
-                        <b>Min score:</b>
-                        {' '}
-                        {item.minScore}
-                      </p>
-                      <p>
-                        <b>Max score:</b>
-                        {' '}
-                        {item.maxScore}
-                      </p>
-                      <p>
-                        <b>Description:</b>
-                        {' '}
-                        {item.description}
-                      </p>
-                      <Button danger>Delete</Button>
-                    </Card>
-                  );
-                }
-                return false;
-              })}
-              <hr />
-              <h3>Advanced Scope</h3>
-              <hr />
-              {storeCriterions.map(item => {
-                if (item.nameTask === record.name && item.categoryCriterionId === 1) {
-                  return (
-                    <Card title={item.title} bordered={false} style={{ margin: 10 }}>
-                      <p>
-                        <b>Min score:</b>
-                        {' '}
-                        {item.minScore}
-                      </p>
-                      <p>
-                        <b>Max score:</b>
-                        {' '}
-                        {item.maxScore}
-                      </p>
-                      <p>
-                        <b>Description:</b>
-                        {' '}
-                        {item.description}
-                      </p>
-                      <Button danger>Delete</Button>
-                    </Card>
-                  );
-                }
-                return false;
-              })}
-              <hr />
-              <h3>Extra Scope</h3>
-              <hr />
-              {storeCriterions.map(item => {
-                if (item.nameTask === record.name && item.categoryCriterionId === 2) {
-                  return (
-                    <Card title={item.title} bordered={false} style={{ margin: 10 }}>
-                      <p>
-                        <b>Min score:</b>
-                        {' '}
-                        {item.minScore}
-                      </p>
-                      <p>
-                        <b>Max score:</b>
-                        {' '}
-                        {item.maxScore}
-                      </p>
-                      <p>
-                        <b>Description:</b>
-                        {' '}
-                        {item.description}
-                      </p>
-                      <Button danger>Delete</Button>
-                    </Card>
-                  );
-                }
-                return false;
-              })}
-              <hr />
-              <h3>Fines</h3>
-              <hr />
-              {storeCriterions.map(item => {
-                if (item.nameTask === record.name && item.categoryCriterionId === 3) {
-                  return (
-                    <Card title={item.title} bordered={false} style={{ margin: 10, padding: 0 }}>
-                      <p>
-                        <b>Min score:</b>
-                        {' '}
-                        {item.minScore}
-                      </p>
-                      <p>
-                        <b>Max score:</b>
-                        {' '}
-                        {item.maxScore}
-                      </p>
-                      <p>
-                        <b>Description:</b>
-                        {' '}
-                        {item.description}
-                      </p>
-                      <Button danger>Delete</Button>
-                    </Card>
-                  );
-                }
-                return false;
-              })}
+              <div>
+                <Collapse>
+                  <Panel header="Basic scope" key="1">
+                    {storeCriterions.map(item => {
+                      if (item.nameTask === record.name && item.categoryCriterionId === 0) {
+                        return (
+                          <Card title={item.title} bordered={false} style={{ margin: 10 }}>
+                            <p>
+                              <b>Min score:</b>
+                              {' '}
+                              {item.minScore}
+                            </p>
+                            <p>
+                              <b>Max score:</b>
+                              {' '}
+                              {item.maxScore}
+                            </p>
+                            <p>
+                              <b>Description:</b>
+                              {' '}
+                              {item.description}
+                            </p>
+                            <p>
+                              <b>Only for mentor:</b>
+                              {' '}
+                              {String(item.onlyForMentor)}
+                            </p>
+                            {((currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor')) && <Button danger>Delete</Button>}
+                          </Card>
+                        );
+                      }
+                      return false;
+                    })}
+                  </Panel>
+                  <Panel header="Advanced Scope" key="2">
+                    {storeCriterions.map(item => {
+                      if (item.nameTask === record.name && item.categoryCriterionId === 1) {
+                        return (
+                          <Card title={item.title} bordered={false} style={{ margin: 10 }}>
+                            <p>
+                              <b>Min score:</b>
+                              {' '}
+                              {item.minScore}
+                            </p>
+                            <p>
+                              <b>Max score:</b>
+                              {' '}
+                              {item.maxScore}
+                            </p>
+                            <p>
+                              <b>Description:</b>
+                              {' '}
+                              {item.description}
+                            </p>
+                            <p>
+                              <b>Only for mentor:</b>
+                              {' '}
+                              {String(item.onlyForMentor)}
+                            </p>
+                            {((currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor')) && <Button danger>Delete</Button>}
+                          </Card>
+                        );
+                      }
+                      return false;
+                    })}
+                  </Panel>
+                  <Panel header="Extra Scope" key="3">
+                    {storeCriterions.map(item => {
+                      if (item.nameTask === record.name && item.categoryCriterionId === 2) {
+                        return (
+                          <Card title={item.title} bordered={false} style={{ margin: 10 }}>
+                            <p>
+                              <b>Min score:</b>
+                              {' '}
+                              {item.minScore}
+                            </p>
+                            <p>
+                              <b>Max score:</b>
+                              {' '}
+                              {item.maxScore}
+                            </p>
+                            <p>
+                              <b>Description:</b>
+                              {' '}
+                              {item.description}
+                            </p>
+                            <p>
+                              <b>Only for mentor:</b>
+                              {' '}
+                              {String(item.onlyForMentor)}
+                            </p>
+                            {((currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor')) && <Button danger>Delete</Button>}
+                          </Card>
+                        );
+                      }
+                      return false;
+                    })}
+                  </Panel>
+                  <Panel header="Fines" key="4">
+                    {storeCriterions.map(item => {
+                      if (item.nameTask === record.name && item.categoryCriterionId === 3) {
+                        return (
+                          <Card title={item.title} bordered={false} style={{ margin: 10, padding: 0 }}>
+                            <p>
+                              <b>Min score:</b>
+                              {' '}
+                              {item.minScore}
+                            </p>
+                            <p>
+                              <b>Max score:</b>
+                              {' '}
+                              {item.maxScore}
+                            </p>
+                            <p>
+                              <b>Description:</b>
+                              {' '}
+                              {item.description}
+                            </p>
+                            <p>
+                              <b>Only for mentor:</b>
+                              {' '}
+                              {String(item.onlyForMentor)}
+                            </p>
+                            {((currentRoleName === 'admin' || currentRoleName === 'trainer' || currentRoleName === 'mentor')) && <Button danger>Delete</Button>}
+                          </Card>
+                        );
+                      }
+                      return false;
+                    })}
+                  </Panel>
+                </Collapse>
+              </div>
             </div>
           ),
           rowExpandable: record => record.description !== 'Not Expandable',
