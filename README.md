@@ -30,7 +30,7 @@
 
 We use Trello, Discord and telegram.
 
-![Imgur](https://i.imgur.com/rP2vvi1.png)
+![Imgur](https://i.imgur.com/oLNIxMd.png)
 
 ## Tools
 
