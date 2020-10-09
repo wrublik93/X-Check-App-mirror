@@ -20,6 +20,10 @@ import {
   getReviews,
   createUser,
   getRoleByName,
+  getTaskCategories,
+  getTaskStatuses,
+  getCriterions,
+  getCriterionCategories,
 } from '@/services/services';
 import {
   changeSuccessAlert,
@@ -32,7 +36,13 @@ import { startSpin, openLogInWindow, openSignUpWindow } from '@/store/actions/mo
 import { getAllReviews } from '@/store/actions/reviews';
 import { getAllRoles } from '@/store/actions/roles';
 import { getAllSessions } from '@/store/actions/sessions';
-import { getAllTasks } from '@/store/actions/tasks';
+import {
+  getAllTasks,
+  getAllTaskCategories,
+  getAllTaskStatuses,
+  getAllCriterions,
+  getAllCriterionCategories,
+} from '@/store/actions/tasks';
 import 'antd/lib/button/style/index.css';
 import 'antd/lib/form/style/index.css';
 import 'antd/lib/input/style/index.css';
@@ -99,6 +109,14 @@ const Forms: FunctionComponent<FormArgs> = ({
           dispatch(getAllCourses(courses));
           const tasks = await getTasks();
           dispatch(getAllTasks(tasks));
+          const criterions = await getCriterions();
+          dispatch(getAllCriterions(criterions));
+          const taskCategories = await getTaskCategories();
+          dispatch(getAllTaskCategories(taskCategories));
+          const criterionCategories = await getCriterionCategories();
+          dispatch(getAllCriterionCategories(criterionCategories));
+          const taskStatuses = await getTaskStatuses();
+          dispatch(getAllTaskStatuses(taskStatuses));
           const sessions = await getSessions();
           dispatch(getAllSessions(sessions));
           const reviews = await getReviews();
